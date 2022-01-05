@@ -35,9 +35,11 @@ def main(email, password, host_id, room_id, tries=3):
 if __name__ == '__main__':
     assert 'SECRETARY_EMAIL' in os.environ
     assert 'SECRETARY_PASSWORD' in os.environ
+    assert 'SECRETARY_ROOM_HOST' in os.environ
+    assert 'SECRETARY_ROOM' in os.environ
     main(
         email=os.environ.get('SECRETARY_EMAIL'),
         password=os.environ.get('SECRETARY_PASSWORD'),
-        host_id='stackoverflow.com',
-        room_id='240735'
+        host_id=os.environ.get('SECRETARY_ROOM_HOST'),
+        room_id=os.environ.get('SECRETARY_ROOM')
     )

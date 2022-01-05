@@ -16,6 +16,8 @@ jobs:
         env:
           SECRETARY_EMAIL: ${{ secrets.SECRETARY_EMAIL }}
           SECRETARY_PASSWORD: ${{ secrets.SECRETARY_PASSWORD }}
+          SECRETARY_ROOM_HOST: stackoverflow.com
+          SECRETARY_ROOM: 240735
         run: |
           pip3 install -r requirements.txt
           python3 ./run.py
