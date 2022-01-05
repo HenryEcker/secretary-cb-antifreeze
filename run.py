@@ -21,8 +21,8 @@ def main(
         client.login(email=email, password=password)
         attempt += 1
         if client.logged_in:
-            logging.debug(f'Login attempt {attempt} failed.')
             break
+        logging.debug(f'Login attempt {attempt} failed.')
         sleep(retry_delay)
 
     # Must be logged in at this point
