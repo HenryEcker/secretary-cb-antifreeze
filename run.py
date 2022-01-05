@@ -10,14 +10,12 @@ def main(email, password, host_id, room_id, tries=3):
 
     attempt = 0
     while attempt < tries:
-        client.login(email=email, password=password)
-        attempt += 1
-        if client.logged_in:
-            break
-        sleep(20)
-
-    # Must be logged in at this point
-    assert client.logged_in
+        try:
+            client.login(email=email, password=password)
+        except chatexchange.browser.LoginError:
+            attempt += 1
+            sleep(20)
+        break
 
     room = client.get_room(room_id)
     try:
