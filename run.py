@@ -21,14 +21,12 @@ def main(email, password, host_id, room_id, tries=3):
 
     room = client.get_room(room_id)
     try:
-        # Join Room
-        room.join()
+        # Create message
         msg = f'{datetime.utcnow()}: Writer’s Block'
         # Send message
         room.send_message(msg)
     finally:
-        # Leave and logout
-        room.leave()
+        # logout
         client.logout()
 
 
