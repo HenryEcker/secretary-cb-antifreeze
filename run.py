@@ -21,7 +21,8 @@ def main(email, password, host_id, room_id, tries=3):
 
     room = client.get_room(room_id)
     try:
-        # Create message
+        # Join Room
+        room.join()
         msg = f'{datetime.utcnow()}: Writer’s Block'
         # Send message
         room.send_message(msg)
