@@ -1,0 +1,23 @@
+name: ANTIFREEZE
+
+on:
+  schedule:
+    - cron: '15 5 */3 * *'
+
+  workflow_dispatch:
+
+jobs:
+  antifreeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: run.py
+        env:
+          SECRETARY_EMAIL: ${{secrets.SECRETARY_EMAIL}}
+          SECRETARY_PASSWORD: ${{secrets.SECRETARY_PASSWORD}}
+          SECRETARY_ROOM_HOST: ${{secrets.SECRETARY_ROOM_HOST}}
+          SECRETARY_ROOM: ${{secrets.SECRETARY_ROOM}}
+        run: |
+          pip3 install -r requirements.txt
+          python3 ./run.py
