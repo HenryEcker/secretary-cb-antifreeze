@@ -14,8 +14,8 @@ jobs:
 
       - name: run.py
         env:
-          SECRETARY_EMAIL: ${{secretary-params.SECRETARY_EMAIL}}
-          SECRETARY_PASSWORD: ${{secretary-params.SECRETARY_PASSWORD}}
+          SECRETARY_EMAIL: ${{ secrets.SECRETARY_EMAIL }}
+          SECRETARY_PASSWORD: ${{ secrets.SECRETARY_PASSWORD }}
         run: |
           pip3 install -r requirements.txt
           python3 ./run.py
