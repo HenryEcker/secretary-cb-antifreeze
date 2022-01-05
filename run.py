@@ -1,15 +1,19 @@
+import logging
 import os
 from datetime import datetime
 from time import sleep
 
-import chatexchange
-import logging
+from chatexchange.client import Client
+from chatexchange.rooms import Room
 
 logging.basicConfig(level=logging.DEBUG)
 
 
-def main(email, password, host_id, room_id, tries=3):
-    client = chatexchange.client.Client(host_id)
+def main(
+        email: str, password: str, host_id: str, room_id: str,
+        tries: int = 3, retry_delay: int = 20, brief_delay: int = 2
+) -> None:
+    client: Client = Client(host_id)
     logging.info(f'Attempting to join Room {room_id} on "{host_id}"')
 
     attempt = 0
@@ -19,22 +23,25 @@ def main(email, password, host_id, room_id, tries=3):
         if client.logged_in:
             logging.debug(f'Login attempt {attempt} failed.')
             break
-        sleep(20)
+        sleep(retry_delay)
 
     # Must be logged in at this point
     assert client.logged_in
 
     logging.info('Logged in')
 
-    room = client.get_room(room_id)
+    room: Room = client.get_room(room_id)
     try:
         # Join room
         room.join()
         logging.info('Joined Room')
-        msg = f'{datetime.utcnow()}: Writer’s Block'
-        # Send message
+        sleep(brief_delay)
+
+        # Build and send message
+        msg: str = f'{datetime.utcnow()}: Writer’s Block'
         room.send_message(msg)
         logging.info(f'Message written: ({msg})')
+        sleep(brief_delay)
     finally:
         # logout
         client.logout()
