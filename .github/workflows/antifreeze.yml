@@ -2,7 +2,7 @@ name: ANTIFREEZE
 
 on:
   schedule:
-    - cron: '15 10 */6 * *'
+    - cron: '15 10 */11 * *'
 
   workflow_dispatch:
 
